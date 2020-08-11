@@ -39,7 +39,7 @@ jobs:
     - name: Deploy to Server
       uses: easingthemes/ssh-deploy@v2.1.1
       env:
-          SSH_PRIVATE_KEY: ${{ DEPLOY }}
+          SSH_PRIVATE_KEY: ${{ secrets.DEPLOY }}
           ARGS: "-rltgoDzvO --delete"
           SOURCE: "dist/"
           REMOTE_HOST: tagarelas.com
