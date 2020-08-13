@@ -35,15 +35,13 @@ jobs:
     - name: Run build task
       run: npm run build --if-present
     - name: Deploy To Server
-      run: echo ${{ secrets.HOST }}
-      run: echo ${{ secrets.USER }}
       uses: cross-the-world/ssh-scp-ssh-pipelines@latest
       env:
         WELCOME: "Start Deploy Proccess"
         LASTSSH: "Upload build files"
       with:
-        host: ${{ secrets.HOST }}
-        user: ${{ secrets.USER }}
+        host: tagarelas.com
+        user: tagarelas
         key: ${{ secrets.DEPLOY }}
         connect_timeout: 10s
         first_ssh: |
