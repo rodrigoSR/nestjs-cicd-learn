@@ -35,6 +35,8 @@ jobs:
     - name: Run build task
       run: npm run build --if-present
     - name: Deploy To Server
+      run: echo ${{ secrets.HOST }}
+      run: echo ${{ secrets.USER }}
       uses: cross-the-world/ssh-scp-ssh-pipelines@latest
       env:
         WELCOME: "Start Deploy Proccess"
