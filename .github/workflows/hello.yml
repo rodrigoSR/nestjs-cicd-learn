@@ -40,11 +40,12 @@ jobs:
         WELCOME: "Start Deploy Proccess"
         LASTSSH: "Upload build files"
       with:
-        host: tagarelas.com
-        user: tagarelas
+        host: ${{ secrets.HOST }}
+        user: ${{ secrets.USER }}
         key: ${{ secrets.DEPLOY }}
-        connect_timeout: 10s
+        connect_timeout: 100s
         first_ssh: |
+          pwd
           cd apps/nest
           rm -rf dist
           rm -rf node_modules
