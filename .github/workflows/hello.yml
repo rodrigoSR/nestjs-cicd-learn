@@ -37,9 +37,11 @@ jobs:
     - name: Deploy To Server
       uses: up9cloud/action-rsync@master
       env:
-        HOST: ${{secrets.HOST}}
+        HOST: tagarelas.com
         KEY: ${{secrets.DEPLOY}}
         TARGET: /home/tagarelas/apps/nest/dist/
+        USER: tagarelas
+        SOURCE: ./dist
         VERBOSE: true
         POST_SCRIPT: |
           cd /home/tagarelas/apps/nest/dist
