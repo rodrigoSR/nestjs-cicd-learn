@@ -35,26 +35,13 @@ jobs:
     - name: Run build task
       run: npm run build --if-present
     - name: Deploy To Server
-      uses: cross-the-world/ssh-scp-ssh-pipelines@latest
+      uses: up9cloud/action-rsync@master
       env:
-        WELCOME: "Start Deploy Proccess"
-        LASTSSH: "Upload build files"
-      with:
-        host: ${{ secrets.HOST }}
-        user: ${{ secrets.USER }}
-        key: ${{ secrets.DEPLOY }}
-        connect_timeout: 100s
-        first_ssh: |
-          pwd
-          cd apps/nest
-          rm -rf dist
-          rm -rf node_modules
-          mkdir dist
-          mkdir node_modules
-        scp: |
-          './dist/*' => '/home/tagarelas/apps/nest/dist/'
-          './node_modules' => '/home/tagarelas/apps/nest/node_modules/'
-        last_ssh: |
-          cd apps/nest
+        HOST: ${{secrets.HOST}}
+        KEY: ${{secrets.DEPLOY}}
+        TARGET: /home/tagarelas/apps/nest/dist/
+        VERBOSE: true
+        POST_SCRIPT: |
+          cd /home/tagarelas/apps/nest/dist
           mkdir tmp
-          touch restart.txt
+          touch tmp/restart.txt
